@@ -17,7 +17,7 @@ services:
       - SKIP_PREFLIGHT_CHECK:true
       - PORT:4200
       - HOST=0.0.0.0
-      - REACT_APP_BACKEND_URL=http://192.168.178.50:3000
+      - REACT_APP_BACKEND_URL=http://192.168.55.14:3000
 
   backend:
     build: ./backend/
@@ -34,8 +34,8 @@ services:
       MONGO_DB: "mongodb://mongodb/irrigation"
 
   mongodb:
-    image: ivanmarban/armhf-mongodb
-    volumes:
-      - ./mongo-volume:/data/db
+    image: mongo:3.6.23
+#    volumes:
+#      - ./mongo-volume:/data/db
     ports:
       - "27018:27017"
