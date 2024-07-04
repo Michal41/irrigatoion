@@ -23,7 +23,7 @@
   "scripts": {
     "dev": "react-scripts start",
     "start": "serve build",
-    "build": "react-scripts build",
+    "build": "REACT_APP_BACKEND_URL=http://192.168.55.14:3000 react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
