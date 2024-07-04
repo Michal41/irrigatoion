@@ -12,6 +12,7 @@ exports.irrigate = async (irrigationTimeInSeconds, sensorName) => {
     rpio.sleep(irrigationTimeInSeconds);
     rpio.write(preferences.signalPin, rpio.LOW);
     rpio.close(preferences.signalPin);
+    console.log('Irrigation finished')
     return "Success"
 }
 
