@@ -20,6 +20,7 @@ services:
       - REACT_APP_BACKEND_URL=http://192.168.55.14:3000
 
   backend:
+    privileged: true
     build: ./backend/
     ports:
       - "3000:3000"
