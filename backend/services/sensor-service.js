@@ -1,17 +1,16 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const preferenceService = require("../services/preference-service")
-let rpio = {};
-if (!process.env.DEVELOPMENT) rpio = require('rpio');
+var Gpio = require('onoff').Gpio;
+var PIN = new Gpio(516, 'out');
+
 
 exports.irrigate = async (irrigationTimeInSeconds, sensorName) => {
-    const preferences = await preferenceService.getPreference(sensorName)
     console.log("Start Irrigation...")
-    rpio.open(preferences.signalPin, rpio.OUTPUT, rpio.LOW);
-    rpio.write(preferences.signalPin, rpio.HIGH);
-    rpio.sleep(irrigationTimeInSeconds);
-    rpio.write(preferences.signalPin, rpio.LOW);
-    rpio.close(preferences.signalPin);
+    PIN.writeSync(1)
+    await new Promise(resolve => setTimeout(resolve, 1000 * irrigationTimeInSeconds));
+    PIN.writeSync(0)
+    PIN.unexport()
     console.log('Irrigation finished')
     return "Success"
 }
