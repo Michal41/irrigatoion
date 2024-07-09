@@ -10,7 +10,6 @@ exports.irrigate = async (irrigationTimeInSeconds, sensorName) => {
     PIN.writeSync(0)
     await new Promise(resolve => setTimeout(resolve, 1000 * irrigationTimeInSeconds));
     PIN.writeSync(1)
-    PIN.unexport()
     console.log('Irrigation finished')
     return "Success"
 }

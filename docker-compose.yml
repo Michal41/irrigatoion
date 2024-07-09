@@ -27,7 +27,7 @@ services:
     volumes:
       - ./backend:/src/backend
       - /src/backend/node_modules/
-    command: npm start
+    command: /bin/sh -c 'node start.js & npm run start'
     restart: always
     depends_on:
       - mongodb
@@ -36,7 +36,7 @@ services:
 
   mongodb:
     image: mongo:3.6.23
-#    volumes:
-#      - ./mongo-volume:/data/db
+    volumes:
+      - ./mongo-volume:/data/db
     ports:
       - "27018:27017"

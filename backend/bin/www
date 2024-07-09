@@ -7,13 +7,27 @@
 var app = require('../app');
 var debug = require('debug')('watering:server');
 var http = require('http');
-
+const { Gpio } = require('onoff');
+var PIN = new Gpio(516, 'out', { initial: 1 });
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
+
+
+const cleanup = () => {
+  PIN.writeSync(0)
+  PIN.writeSync(1)
+  PIN.unexport()
+  console.log('GPIO pins have been released.');
+};
+
+process.on('SIGINT', cleanup);
+process.on('SIGTERM', cleanup);
+process.on('exit', cleanup);
+
 
 /**
  * Create HTTP server.
