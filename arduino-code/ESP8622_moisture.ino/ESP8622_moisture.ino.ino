@@ -17,13 +17,16 @@ int readIndex = 0;          // the index of the current reading
 int total = 0;              // the running total
 int average = 0;            // the average
 
+
+WiFiClient wifiClient;      // Create a WiFiClient object
+
 void setup() {
   Serial.begin(115200);        // Serial connection
   WiFi.begin(ssid, password);  // WiFi connection
 
-  while (WiFi.status() != WL_CONNECTED) {  // Wait for the WiFI connection completion
+  while (WiFi.status() != WL_CONNECTED) {  // Wait for the WiFi connection completion
     delay(500);
-    Serial.println("Waiting for connection");
+    Serial.println("Waiting for connection2");
   }
 
   for (int thisReading = 0; thisReading < numReadings; thisReading++) {
@@ -60,9 +63,10 @@ void postData(int data) {
 
     HTTPClient http;  // Declare object of class HTTPClient
 
-    http.begin("http://" + (String)host + ":" + (String)port + "/measurement/" + (String)sensorName);  // Specify request destination
+    String url = "http://" + String(host) + ":" + String(port) + "/measurement/" + sensorName;
+    http.begin(wifiClient, url);  // Specify request destination
     http.addHeader("Content-Type", "application/json");  // Specify content-type header
-    http.POST("{\"capacity\": \"" + (String)data + "\"}");// Send the request
+    http.POST("{\"capacity\": \"" + String(data) + "\"}");// Send the request
     http.end();                                        // Close connection
   } else {
     Serial.println("Error in WiFi connection");
