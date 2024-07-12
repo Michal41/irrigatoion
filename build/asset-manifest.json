@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9e790f5f.chunk.css",
+    "main.js": "/static/js/main.9dc96fc8.chunk.js",
+    "main.js.map": "/static/js/main.9dc96fc8.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/js/2.7353534b.chunk.js": "/static/js/2.7353534b.chunk.js",
+    "static/js/2.7353534b.chunk.js.map": "/static/js/2.7353534b.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.5307bce203cfd71a1d2094aff6a6a1fd.js": "/precache-manifest.5307bce203cfd71a1d2094aff6a6a1fd.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.9e790f5f.chunk.css.map": "/static/css/main.9e790f5f.chunk.css.map",
+    "static/media/style.css": "/static/media/IBMPlexMono-Medium.1f86f6c4.ttf",
+    "static/media/logo.svg": "/static/media/logo.0d0b1f3c.svg",
+    "static/media/moon.svg": "/static/media/moon.5e028c86.svg",
+    "static/media/sun.svg": "/static/media/sun.0e45b318.svg",
+    "static/media/watering.svg": "/static/media/watering.ee32fdea.svg"
+  }
+}
