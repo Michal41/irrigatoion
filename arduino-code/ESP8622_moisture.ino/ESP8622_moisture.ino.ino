@@ -1,10 +1,10 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 
-const String sensorName = "***";
-const String ssid = "***";
-const String password = "***";
-const char* host = "***";
+const String sensorName = "ogrod";
+const String ssid = "Tyrion 2.4";
+const String password = "123456789";
+const char* host = "192.168.55.14";
 const int port = 3000;
 
 const int numReadings = 30;
@@ -36,11 +36,12 @@ void setup() {
 
 void loop() {
     int currentReading = analogRead(inputPin1);
-    if (currentReading > 25 && currentReading < 1000) {
         calculateAverage(currentReading);
-    } else {
-        delay(10);
-    }
+    // if (currentReading > 25 && currentReading < 1000) {
+    //     calculateAverage(currentReading);
+    // } else {
+    //     delay(10);
+    // }
 }
 
 void calculateAverage(int currentReading) {
