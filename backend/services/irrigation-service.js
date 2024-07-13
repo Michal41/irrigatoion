@@ -17,10 +17,14 @@ exports.getIrrigations = async (sensorName) => {
 
 exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
     const preferences = await preferenceService.getPreference(sensorName)
-    if (await isLastIrrigationTimeBufferPassed(preferences, sensorName) && currentCapacity > preferences.capacityBuffer) {
-        irrigationService.setIrregation(currentCapacity, sensorName)
-        sensorService.irrigate(preferences.irrigationTimeInSeconds, sensorName)
-        return true
+    if (await isLastIrrigationTimeBufferPassed(preferences, sensorName)) {
+        if(currentCapacity > preferences.capacityBuffer) {
+            irrigationService.setIrregation(currentCapacity, sensorName)
+            sensorService.irrigate(preferences.irrigationTimeInSeconds, sensorName)
+            return true
+        }
+        sensorService.stopIrrigation()
+        return false
     } else return false
 }
 

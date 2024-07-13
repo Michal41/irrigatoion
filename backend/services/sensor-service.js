@@ -18,3 +18,8 @@ exports.getSensorNames = async () => {
     const preferences = await preferenceService.getPreferences()
     return preferences.map(preference => preference.sensorName)
 }
+
+
+exports.stopIrrigation = async () => {
+    PIN.writeSync(1)
+}
