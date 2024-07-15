@@ -8,12 +8,11 @@ exports.getSensorNames = async (req, res, next) => {
 
 exports.irrigation = async (req, res, next) => {
     const preferences = await preferenceService.getPreference(req.params.sensorName);
+    await irrigationService.setIrregation(0, req.params.sensorName)
     const sensorResult = await sensorService.irrigate(preferences.irrigationTimeInSeconds, req.params.sensorName);
     if (sensorResult) {
-        await irrigationService.setIrregation(null).then(() => {
-            res.status(200);
-            res.json("Success");
-        });
+        res.status(200);
+        res.json("Success");
     } else {
         res.status(500);
         res.json("Failed");
