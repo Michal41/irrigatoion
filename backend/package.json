@@ -21,8 +21,9 @@
     "rpio": "^2.1.1"
   },
   "devDependencies": {
+    "jasmine": "^3.99.0",
     "nodemon": "^1.18.5",
-    "jasmine": "^3.99.0"
+    "sinon": "^9.2.4"
   },
   "main": "app.js",
   "keywords": [],
