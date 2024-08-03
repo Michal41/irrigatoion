@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon node ./bin/www"
+    "start": "nodemon node ./bin/www",
+    "test": "jasmine"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -20,7 +21,8 @@
     "rpio": "^2.1.1"
   },
   "devDependencies": {
-    "nodemon": "^1.18.5"
+    "nodemon": "^1.18.5",
+    "jasmine": "^3.99.0"
   },
   "main": "app.js",
   "keywords": [],
