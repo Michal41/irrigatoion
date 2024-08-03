@@ -21,8 +21,9 @@ exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
         irrigationService.setIrregation(currentCapacity, sensorName)
         sensorService.irrigate(preferences.irrigationTimeInSeconds, sensorName)
         return true
+    } else {
+        sensorService.stopIrrigation(sensorName)
     }
-    sensorService.stopIrrigation(sensorName)
     return false
 }
 

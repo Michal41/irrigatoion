@@ -21,9 +21,9 @@ exports.irrigate = async (irrigationTimeInSeconds, sensorName) => {
     var PIN = new Gpio(preferences.signalPin, 'out', { initial: 1 }); // on rasberyPI it is physical 7
     console.log("Start Irrigation...")
     PIN.writeSync(0)
-    await new Promise(resolve => setTimeout(resolve, 1000 * irrigationTimeInSeconds));
-    PIN.writeSync(1)
-    console.log('Irrigation finished')
+    // await new Promise(resolve => setTimeout(resolve, 1000 * irrigationTimeInSeconds));
+    // PIN.writeSync(1)
+    // console.log('Irrigation finished')
     return "Success"
 }
 
