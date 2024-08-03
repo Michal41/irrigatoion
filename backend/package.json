@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon node ./bin/www",
-    "test": "jasmine"
+    "test": "NODE_ENV=test jasmine"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

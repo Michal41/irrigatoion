@@ -1,7 +1,18 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const preferenceService = require("../services/preference-service")
-var Gpio = require('onoff').Gpio;
+
+let Gpio;
+
+if (process.env.NODE_ENV !== 'test') {
+  Gpio = require('onoff').Gpio;
+} else {
+  Gpio = class {
+    constructor() {}
+    writeSync() {}
+  };
+}
+
 var PIN = new Gpio(516, 'out', { initial: 1 }); // on rasberyPI it is physical 7
 
 
