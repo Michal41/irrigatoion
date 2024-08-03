@@ -6,8 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-var Gpio = require('onoff').Gpio;
-var PIN = new Gpio(516, 'out', { initial: 1 }); // on rasberyPI it is physical 7
+
 
 const app = express();
 
@@ -19,8 +18,6 @@ dotenv.config({ path: (__dirname, './.env')});
 // Mongoose Configs
 mongoose.Promise = global.Promise;
 const uri = process.env.MONGO_DB;
-PIN.writeSync(0)
-PIN.writeSync(1)
 mongoose.connect(uri, {
     useMongoClient: true
   })
