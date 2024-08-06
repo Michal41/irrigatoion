@@ -5,6 +5,8 @@ exports.getPreference = async (sensorName) => {
             sensorName
         }, {
             $setOnInsert: {
+                irrigationTimeStart: '21:00',
+                irrigationTimeEnd: '4:00',
                 minIrrigationIntervalInMinutes: 15,
                 irrigationTimeInSeconds: 10,
                 capacityBuffer: 500,

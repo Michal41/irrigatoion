@@ -21,6 +21,14 @@ const preferenceSchema = new Schema({
     signalPin: {
         type: Number,
         required: true
+    },
+    irrigationTimeStart: {
+        type: String,
+        required: true
+    },
+    irrigationTimeEnd: {
+        type: String,
+        required: true
     }
 })
 
