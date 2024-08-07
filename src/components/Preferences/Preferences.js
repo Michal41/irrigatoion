@@ -83,7 +83,7 @@ const Preferences = props => {
       </div>
       <div className="preference">
         <h3>Minimum irrigation time interval [min]:</h3>
-        <input sx={{ color: "text", borderColor: preferenceBorderColor("minIrrigationIntervalInMinutes") }} type="number"
+        <input sx={{ color: "text", background: 'inherit', borderColor: preferenceBorderColor("capacityBuffer"), borderRadius: '10px' }} type="number"
           onChange={(e) => setPreferences({ ...preferences, minIrrigationIntervalInMinutes: parseInt(e.target.value) })}
           value={preferences.minIrrigationIntervalInMinutes} />
       </div>
@@ -92,6 +92,28 @@ const Preferences = props => {
         <input sx={{ color: "text", borderColor: preferenceBorderColor("capacityBuffer") }} type="number"
           onChange={(e) => setPreferences({ ...preferences, capacityBuffer: parseInt(e.target.value) })}
           value={preferences.capacityBuffer} />
+      </div>
+      <div className="preference">
+        <h3>Irrigation starts:</h3>
+        <select sx={{ color: "text", borderColor: preferenceBorderColor("signalPin"), borderRadius: '10px', background: 'inherit', }} type="number"
+          onChange={(e) => setPreferences({ ...preferences, irrigationTimeStart: e.target.value })}
+          value={preferences.irrigationTimeStart}
+        >
+          {[...Array(24).keys()].map(item => (
+            <option key={item} value={`${item + 1}:00`}>{`${item + 1}:00`}</option>
+          ))}
+        </select>
+      </div>
+      <div className="preference">
+        <h3>Irrigation ends:</h3>
+        <select sx={{ color: "text", borderColor: preferenceBorderColor("signalPin"), borderRadius: '10px', background: 'inherit',  }} type="number"
+          onChange={(e) => setPreferences({ ...preferences, irrigationTimeEnd: e.target.value })}
+          value={preferences.irrigationTimeEnd}
+        >
+          {[...Array(24).keys()].map(item => (
+            <option key={item} value={`${item + 1}:00`}>{`${item + 1}:00`}</option>
+          ))}
+        </select>
       </div>
       <div className="preference">
         <h3>Signal Pin:</h3>
