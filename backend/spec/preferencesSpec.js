@@ -8,8 +8,8 @@ describe("A suite", function() {
     // create measurement to create sensor
     const sensorName = 'fox'
     const payload =  {
-      irrigationTimeStart: '21:00',
-      irrigationTimeEnd: '4:00',
+      irrigationTimeStart: '22:00',
+      irrigationTimeEnd: '5:00',
       minIrrigationIntervalInMinutes: 5,
       irrigationTimeInSeconds: 5,
       capacityBuffer: 5,

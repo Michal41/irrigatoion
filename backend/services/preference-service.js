@@ -29,6 +29,8 @@ exports.updatePreferences = async (payload, sensorName) => {
     const preferences = {
         minIrrigationIntervalInMinutes: payload.minIrrigationIntervalInMinutes,
         irrigationTimeInSeconds: payload.irrigationTimeInSeconds,
+        irrigationTimeStart: payload.irrigationTimeStart,
+        irrigationTimeEnd: payload.irrigationTimeEnd,
         capacityBuffer: payload.capacityBuffer,
         signalPin: payload.signalPin,
         sensorName: payload.sensorName
