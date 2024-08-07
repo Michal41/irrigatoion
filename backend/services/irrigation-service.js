@@ -17,6 +17,9 @@ exports.getIrrigations = async (sensorName) => {
 
 exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
     const preferences = await preferenceService.getPreference(sensorName)
+    if(!isInIrrigationTimeSpan(preferences)) {
+        return false
+    }
     if(currentCapacity > preferences.capacityBuffer) {
         irrigationService.setIrregation(currentCapacity, sensorName)
         sensorService.irrigate(preferences.irrigationTimeInSeconds, sensorName)
@@ -27,12 +30,18 @@ exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
     return false
 }
 
-async function isLastIrrigationTimeBufferPassed(preferences, sensorName) {
-    const lastMeasurement = await irrigationService.getLastIrrigation(sensorName)
-    const now = new Date().getTime()
-    if (lastMeasurement) {
-        let lastMeasurementTime = lastMeasurement.timestamp
-        lastMeasurementTimePlusBuffer = lastMeasurementTime.setMinutes(lastMeasurementTime.getMinutes() + (preferences.irrigationTimeInSeconds / 60))
-        return now > lastMeasurementTimePlusBuffer
-    } else return true
+
+function isInIrrigationTimeSpan(preferences) {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+    const currentDay = currentDate.getDate();
+    const startDate = new Date(currentYear, currentMonth, currentDay, ...preferences.irrigationTimeStart.split(':').map(Number));
+    const endDate = new Date(currentYear, currentMonth, currentDay, ...preferences.irrigationTimeEnd.split(':').map(Number));
+    if (endDate <= startDate) {
+        endDate.setDate(endDate.getDate() + 1);
+    }
+    const currentTime = new Date();
+    return currentTime >= startDate && currentTime <= endDate;
 }
+

@@ -30,7 +30,7 @@ describe("A suite", function() {
       sandbox = sinon.createSandbox();
       mockIrrigate = sandbox.stub(sensorService, 'irrigate').resolves('Success');
       mockStopIrrigate = sandbox.stub(sensorService, 'stopIrrigation').resolves('Success');
-      clock = sinon.useFakeTimers(new Date().getTime());
+      clock = sandbox.useFakeTimers(new Date('2024-12-12T12:00:00').getTime());
   });
 
   afterEach(function () {
@@ -40,12 +40,14 @@ describe("A suite", function() {
 
   // default value for capacityBuffer is 500
   it("should call irrigation fun if soil is dry", async function() {
+    clock.tick(10 * 60 * 60 * 1000);
     const res = {json: () => {}}
     await MeasurementController.setMeasurement(lowMoisturePayload, res)
     expect(mockIrrigate.calledOnce).toBe(true);
   });
 
   it("should not call irrigation fun if soil is wet", async function() {
+    clock.tick(10 * 60 * 60 * 1000);
     // low capacity indicate that soil is wet
     const req = {
       body: {
@@ -62,11 +64,20 @@ describe("A suite", function() {
 
   it("should call stop irrigate function if soil moisture is high enough", async function() {
     const res = {json: () => {}}
+    clock.tick(10 * 60 * 60 * 1000);
     await MeasurementController.setMeasurement(lowMoisturePayload, res)
     expect(mockIrrigate.calledOnce).toBe(true);
-    // Advance time by 2 hours
-    clock.tick(22 * 60 * 60 * 1000);
     await MeasurementController.setMeasurement(highMoisturePayload, res)
     expect(mockStopIrrigate.calledOnce).toBe(true);
+  });
+
+
+  it("should not call irrigation function if current time do not match irrigation time span", async function() {
+    const res = {json: () => {}}
+    await MeasurementController.setMeasurement(lowMoisturePayload, res)
+    expect(mockIrrigate.calledOnce).toBe(false);
+    clock.tick(10 * 60 * 60 * 1000);
+    await MeasurementController.setMeasurement(lowMoisturePayload, res)
+    expect(mockIrrigate.calledOnce).toBe(true);
   });
 });
