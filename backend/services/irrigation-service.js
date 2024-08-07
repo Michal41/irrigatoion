@@ -18,6 +18,7 @@ exports.getIrrigations = async (sensorName) => {
 exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
     const preferences = await preferenceService.getPreference(sensorName)
     if(!isInIrrigationTimeSpan(preferences)) {
+        sensorService.stopIrrigation(sensorName)
         return false
     }
     if(currentCapacity > preferences.capacityBuffer) {
